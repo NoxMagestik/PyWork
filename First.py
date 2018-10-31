@@ -49,6 +49,7 @@ class Human:
 isLooping = True
 database = open("humans.csv", mode='a')
 readdata = open("humans.csv", mode='r')
+reader = csv.reader(readdata, delimiter=',')
 while isLooping:
     database_writer = csv.writer(database, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     command = input('Enter Command.')
