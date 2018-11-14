@@ -9,7 +9,7 @@ Created on Mon Nov  5 18:32:04 2018
 from tkinter import *
 import tkinter.messagebox
 playerX = True
-turn = 1
+turn = 0
 isPlaying = True
 def close_window():
     window.destroy()
@@ -17,7 +17,7 @@ def reset():
     global playerX, topLeft, topMiddle, topRight, middleLeft, middleMiddle, middleRight, bottomLeft, bottomMiddle, bottomRight, window, isPlaying, turn
     isPlaying = True
     playerX = True
-    turn = 1
+    turn = 0
     topLeft = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
     topLeft["command"] = lambda:enter(topLeft)
     topLeft.grid(row="0", column="0")
@@ -124,7 +124,7 @@ def enter(button):
 
     # Checks for draw
     if isPlaying:
-        if turn >= 10:
+        if turn >= 9:
             tkinter.messagebox.showinfo('Draw!', 'Both players drew!')
             isPlaying = False
 
