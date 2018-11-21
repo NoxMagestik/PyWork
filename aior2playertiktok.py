@@ -1,34 +1,227 @@
-from random import randint
 
+# import libraries
+
+from random import randint
 from tkinter import *
 import tkinter.messagebox
+# variable for two player game, if false then next entry will be an 'o'
 playerX = True
+# turn variable is necessary for draw check, if still playing and turn is 9, then it must be a draw
 turn = 0
+# isPlaying is false if game is won
 isPlaying = True
 strategy = 0
+# array to track which spaces have been played in, in the order
+"""
+0 | 1 | 2
+----------
+3 | 4 | 5
+----------
+6 | 7 | 8
+
+"""
 played = [False, False, False, False, False, False, False, False, False]
+# set to false if computer makes successful play
 computerHasNotPlayed = True
+# ai score
 score = 0
 comScore = 0
+# oScore and xScore only used in 2 player mode
 oScore = 0
 xScore = 0
+# only set to two if the player has made a successful play
 playerPlayed = False
-isAi = tkinter.messagebox.askquestion('AI or 2 player', 'Do you want to play against the AI? If you click no, you will be playing a two player game.')
+
 def close_window():
+    # Closes the window
     window.destroy()
 
 
-
+# This is the enter method for the two player game
+# two player functions -->
 def enter(button):
+    # allows the function to change these variables
     global playerX, turn, isPlaying, xScore, oScore
+    # checks if it is playerX's turn, if so, enters an x
     if playerX == True:
-        button["text"] = "x"
-        turn += 1
-        playerX = False
+        # checks if topLeft is played in, if not, then set text to x
+        if button == topLeft:
+            if played[0] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+            else:
+                # sets tkinter passed in as argument's text x
+                button["text"] = "x"
+                turn += 1
+                played[0] = True
+                playerX = False
+        # checks if topMiddle is played in, if not, then set text to x
+        elif button == topMiddle:
+            if played[1] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+            else:
+                button["text"] = "x"
+                turn += 1
+                played[1] = True
+                playerX = False
+        # checks if topRight is played in, if not, then set text to x
+        elif button == topRight:
+            if played[2] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+            else:
+                button["text"] = "x"
+                turn += 1
+                played[2] = True
+                playerX = False
+        # checks if middleLeft is played in, if not, then set text to x
+        elif button == middleLeft:
+            if played[3] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+            else:
+                button["text"] = "x"
+                turn += 1
+                played[3] = True
+                playerX = False
+        # checks if middleMiddle is played in, if not, then set text to x
+        elif button == middleMiddle:
+            if played[4] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+                pass
+            else:
+                button["text"] = "x"
+                turn += 1
+                played[4] = True
+                playerX = False
+        # checks if middleRight is played in, if not, then set text to x
+        elif button == middleRight:
+            if played[5] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+                pass
+            else:
+                button["text"] = "x"
+                turn += 1
+                played[5] = True
+                playerX = False
+        # and so on, until bottomRight
+        elif button == bottomLeft:
+            if played[6] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+                pass
+            else:
+                button["text"] = "x"
+                turn += 1
+                played[6] = True
+                playerX = False
+        elif button == bottomMiddle:
+            if played[7] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+                pass
+            else:
+                button["text"] = "x"
+                turn += 1
+                played[7] = True
+                playerX = False
+        elif button == bottomRight:
+            if played[8] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+                pass
+            else:
+                button["text"] = "x"
+                turn += 1
+                played[8] = True
+                playerX = False
+    # else triggers if playerX is false i.e if it is o's turn
     else:
-        button["text"] = "o"
-        turn += 1
-        playerX = True
+        # checks if topLeft is played in, if not, then set text to x
+        if button == topLeft:
+            if played[0] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[0] = True
+                # sets playerX to true, so that an x will be entered next click
+                playerX = True
+        # checks for each button until bottomRight
+        elif button == topMiddle:
+            if played[1] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[1] = True
+                playerX = True
+        elif button == topRight:
+            if played[2] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[2] = True
+                playerX = True
+        elif button == middleLeft:
+            if played[3] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[3] = True
+                playerX = True
+        elif button == middleMiddle:
+            if played[4] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+                pass
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[4] = True
+                playerX = True
+        elif button == middleRight:
+            if played[5] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+                pass
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[5] = True
+                playerX = True
+        elif button == bottomLeft:
+            if played[6] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+                pass
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[6] = True
+                playerX = True
+        elif button == bottomMiddle:
+            if played[7] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+                pass
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[7] = True
+                playerX = True
+        elif button == bottomRight:
+            if played[8] == True:
+                tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
+
+                pass
+            else:
+                button["text"] = "o"
+                turn += 1
+                played[8] = True
+                playerX = True
+
 
     # Checks for horizontal three in a row for player X
     if topLeft['text'] == 'x' and topMiddle['text'] == 'x' and topRight['text'] == 'x':
@@ -121,9 +314,10 @@ def enter(button):
         if ans == 'yes':
             reset()
         else:
-            print("X's score was " + str(xScore) + ". Y's score was " + str(oScore) + "." )
+            print("X's score was " + str(xScore) + ". O's score was " + str(oScore) + "." )
             close_window()
 def reset():
+    # sets all variables back to starting value and all buttons' text to black
     global playerX, topLeft, topMiddle, topRight, middleLeft, middleMiddle, middleRight, bottomLeft, bottomMiddle, bottomRight, window, isPlaying, turn
     isPlaying = True
     playerX = True
@@ -155,11 +349,15 @@ def reset():
     bottomRight = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
     bottomRight.grid(row="2", column="3")
     bottomRight["command"] = lambda:enter(bottomRight)
+
+
+# ai functions -->
 def aienter(button):
     global playerX, topLeft, topMiddle, topRight, middleLeft, middleMiddle, middleRight, bottomLeft, bottomMiddle, bottomRight, window, isPlaying, turn, strategy, score, comScore
     global playerPlayed
 
     computerHasNotPlayed = True
+    # checks if button is played in, if not, enter x
     if button == topLeft:
         if played[0] == True:
             tkinter.messagebox.showinfo('Error!', 'This space has already been played in!')
@@ -242,6 +440,8 @@ def aienter(button):
             turn += 1
             played[8] = True
             playerPlayed = True
+
+    # win check comes before o play, so that it does not mess up
 
     # Checks for horizontal three in a row for player X
     if topLeft['text'] == 'x' and topMiddle['text'] == 'x' and topRight['text'] == 'x':
@@ -338,7 +538,7 @@ def aienter(button):
                         if played[0] == True:
                             pass
                         else:
-                            topLeft['text'] = "o"
+                            topLeft['text'] = "o    "
                             played[0] = True
                             computerHasNotPlayed = False
 
@@ -485,7 +685,7 @@ def aienter(button):
                         if played[0] == True:
                             pass
                         else:
-                            topLeft['text'] == "o"
+                            topLeft['text'] = "o"
                             played[0] = True
                             computerHasNotPlayed = False
 
@@ -896,75 +1096,15 @@ def aireset():
     buttons = [topLeft, topMiddle, topRight, middleLeft, middleMiddle, middleRight, bottomLeft, bottomMiddle, bottomRight]
 
 
-
-
+font=('helvetica', 20)
+window = Tk()
+window.geometry("900x900")
+isAi = tkinter.messagebox.askquestion('AI or 2 player', 'Do you want to play against the AI? If you click no, you will be playing a two player game.')
 if isAi == 'yes':
     font=('helvetica', 20)
-    window = Tk()
-    window.geometry("900x900")
-    topLeft = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    topLeft["command"] = lambda:aienter(topLeft)
-    topLeft.grid(row="0", column="0")
-    topMiddle = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    topMiddle.grid(row="0", column="1")
-    topMiddle["command"] = lambda:aienter(topMiddle)
-    topRight = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    topRight.grid(row="0", column="3")
-    topRight["command"] = lambda:aienter(topRight)
-    middleLeft = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    middleLeft["command"] = lambda:aienter(middleLeft)
-    middleLeft.grid(row="1", column="0")
-    middleMiddle = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    middleMiddle.grid(row="1", column="1")
-    middleMiddle["command"] = lambda:aienter(middleMiddle)
-    middleRight = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    middleRight.grid(row="1", column="3")
-    middleRight["command"] = lambda:aienter(middleRight)
-    bottomLeft = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    bottomLeft.grid(row="2", column="0")
-    bottomLeft["command"] = lambda:aienter(bottomLeft)
-    bottomMiddle = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    bottomMiddle.grid(row="2", column="1")
-    bottomMiddle["command"] = lambda:aienter(bottomMiddle)
-    bottomRight = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    bottomRight.grid(row="2", column="3")
-    bottomRight["command"] = lambda:aienter(bottomRight)
-    buttons = [topLeft, topMiddle, topRight, middleLeft, middleMiddle, middleRight, bottomLeft, bottomMiddle, bottomRight]
-
-
+    aireset()
 else:
-    font=('helvetica', 20)
-
-    window = Tk()
-    window.geometry("900x900")
-    topLeft = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    topLeft["command"] = lambda:enter(topLeft)
-    topLeft.grid(row="0", column="0")
-    topMiddle = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    topMiddle.grid(row="0", column="1")
-    topMiddle["command"] = lambda:enter(topMiddle)
-    topRight = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    topRight.grid(row="0", column="3")
-    topRight["command"] = lambda:enter(topRight)
-    middleLeft = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    middleLeft["command"] = lambda:enter(middleLeft)
-    middleLeft.grid(row="1", column="0")
-    middleMiddle = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    middleMiddle.grid(row="1", column="1")
-    middleMiddle["command"] = lambda:enter(middleMiddle)
-    middleRight = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    middleRight.grid(row="1", column="3")
-    middleRight["command"] = lambda:enter(middleRight)
-    bottomLeft = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    bottomLeft.grid(row="2", column="0")
-    bottomLeft["command"] = lambda:enter(bottomLeft)
-    bottomMiddle = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    bottomMiddle.grid(row="2", column="1")
-    bottomMiddle["command"] = lambda:enter(bottomMiddle)
-    bottomRight = Button(window, text="", font=('helvetica', 30), height=5, width = 10)
-    bottomRight.grid(row="2", column="3")
-    bottomRight["command"] = lambda:enter(bottomRight)
-
+    reset()
 
 
 window.mainloop()
