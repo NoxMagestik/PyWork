@@ -40,7 +40,7 @@ canPlay = True
 B_1 = Button(leftFrame, text='Ones', font=otherFont, height=bHeight, width=bWidth, command=lambda:score(B_1))
 B_1.grid(row='1', column='1')
 L_1 = Label(leftFrame, text="0", font=otherFont, height=bHeight, width=bWidth)
-L_1.grid(row='1', column='2')d
+L_1.grid(row='1', column='2')
 
 B_3OfKind = Button(rightFrame, text='Three of a kind', font=otherFont, height=bHeight, width=bWidth, command=lambda:score(B_3OfKind))
 B_3OfKind.grid(row='1', column='1')
