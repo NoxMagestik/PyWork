@@ -59,10 +59,11 @@ def service_connection(key, mask):
         recv_data = sock.recv(2048)  # Should be ready to read
         if recv_data:
             data.outb += recv_data
-        else:
+        """ else:
             print('closing connection to', data.addr)
             sel.unregister(sock)
             sock.close()
+            """
     if mask & selectors.EVENT_WRITE:
         if data.outb:
             print('echoing', repr(data.outb), 'to', data.addr)

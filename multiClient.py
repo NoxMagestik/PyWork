@@ -31,10 +31,10 @@ def service_connection(key, mask):
         if recv_data:
             print("received", repr(recv_data), "from connection", data.connid)
             
-        if not recv_data:
+        """if not recv_data:
             print("closing connection", data.connid)
             sel.unregister(sock)
-            sock.close()
+            sock.close()"""
     if mask & selectors.EVENT_WRITE:
         if not data.outb:
             data.outb = totScore.to_bytes(2, byteorder='big')
